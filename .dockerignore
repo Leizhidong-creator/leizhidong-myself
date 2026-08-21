@@ -1,0 +1,16 @@
+node_modules
+dist
+.vercel
+.git
+.env
+.env.*
+*.log
+dev-server*.log
+preview-server*.log
+tests
+作品展示一
+作品展示二
+作品展示三
+src/assets/thumbnails/garden-dream.png
+src/assets/thumbnails/zhiyan-agent.png
+src/assets/thumbnails/pet-agent.png

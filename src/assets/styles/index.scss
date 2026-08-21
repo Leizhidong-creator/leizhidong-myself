@@ -1,0 +1,62 @@
+@use "./reset.scss";
+@use "./variables.scss";
+@use "./colors.scss";
+@use "./fonts.scss";
+@use "./grid.scss";
+@use "./lenis.scss";
+@use "./projects.scss";
+@use "./preloader.scss";
+
+html {
+  background: var(--color-background-400);
+  color: var(--color-text-400);
+  --icon-color: var(--color-text-400);
+  font-family: "Urbanist";
+  letter-spacing: 0.02em;
+  overflow-y: scroll !important;
+
+  --vh: 1vh;
+  --dvh: 1vh;
+  --svh: 1vh;
+  --lvh: 1vh;
+
+  --dvh: 1dvh;
+  --svh: 1svh;
+  --lvh: 1lvh;
+
+  --vw: 1vw;
+  --dvw: 1vw;
+  --svw: 1vw;
+  --lvw: 1vw;
+
+  --dvw: 1dvw;
+  --svw: 1svw;
+  --lvw: 1lvw;
+}
+
+.is-loading {
+  overscroll-behavior: none;
+  position: fixed;
+  width: calc(var(--svw) * 100);
+  height: calc(var(--svh) * 100);
+}
+
+::selection {
+  background: #2d2a24;
+  color: rgb(255, 255, 255);
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #2d2a24;
+  color: rgb(255, 255, 255);
+  text-shadow: none;
+}
+
+.children-unclickable {
+  pointer-events: all;
+
+  * {
+    pointer-events: none;
+  }
+}

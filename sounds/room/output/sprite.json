@@ -1,0 +1,40 @@
+{
+  "resources": [
+    "output/sprite.ogg",
+    "output/sprite.m4a",
+    "output/sprite.mp3",
+    "output/sprite.ac3"
+  ],
+  "spritemap": {
+    "bird": {
+      "start": 0,
+      "end": 0.13689342403628119,
+      "loop": false
+    },
+    "keyboard": {
+      "start": 1.2,
+      "end": 4.056666666666667,
+      "loop": false
+    },
+    "mouse-wheel-0": {
+      "start": 4.4,
+      "end": 4.6086167800453515,
+      "loop": false
+    },
+    "mouse-wheel-1": {
+      "start": 5.6,
+      "end": 5.912993197278912,
+      "loop": false
+    },
+    "mouse-wheel-2": {
+      "start": 6.8,
+      "end": 7.0665532879818596,
+      "loop": false
+    },
+    "notification": {
+      "start": 8,
+      "end": 8.961972789115647,
+      "loop": false
+    }
+  }
+}

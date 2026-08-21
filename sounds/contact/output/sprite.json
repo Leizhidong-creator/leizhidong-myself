@@ -1,0 +1,20 @@
+{
+  "resources": [
+    "output/sprite.ogg",
+    "output/sprite.m4a",
+    "output/sprite.mp3",
+    "output/sprite.ac3"
+  ],
+  "spritemap": {
+    "gasp": {
+      "start": 0,
+      "end": 0.48532879818594105,
+      "loop": false
+    },
+    "snore": {
+      "start": 1.2,
+      "end": 3.961972789115646,
+      "loop": false
+    }
+  }
+}
