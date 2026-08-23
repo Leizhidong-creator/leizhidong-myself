@@ -8,7 +8,7 @@ import { room } from "./room";
 import { sleepingSprite } from "./contact/sleeping-sprite";
 import { renderer } from "../core/renderer";
 
-const init = async () => {
+const init = () => {
   avatarHologram.init();
   avatar.init();
   contact.init();
@@ -18,7 +18,7 @@ const init = async () => {
   room.init();
   sleepingSprite.init();
 
-  await renderer.compile();
+  renderer.compile();
 };
 
 const destroy = () => {

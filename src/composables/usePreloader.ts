@@ -1,40 +1,18 @@
-import { ref, watch, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { resources } from "../utils/resources";
-import { createPreloaderGate } from "./preloaderGate";
-import { threeReady } from "../three";
+import gsap from "gsap";
 
 export const preloaderVisible = ref(true);
 
 export const usePreloader = () => {
   const progress = ref(0);
   const resourcesProgress = ref(0);
-  let gate: ReturnType<typeof createPreloaderGate> | null = null;
-
-  const revealApp = () => {
-    const preloader = document.querySelector(".preloader") as HTMLElement | null;
-    document.body.classList.remove("is-loading");
-    preloader?.classList.add("preloader-hidden");
-    preloaderVisible.value = false;
-  };
 
   onMounted(() => {
     resources.on("progress", (newProgress) => {
       resourcesProgress.value = newProgress;
     });
-
-    gate = createPreloaderGate(revealApp);
-    if (threeReady.value) {
-      gate.markReady();
-    } else {
-      const stopWatchingThree = watch(threeReady, (ready) => {
-        if (!ready) return;
-        gate?.markReady();
-        stopWatchingThree();
-      });
-    }
   });
-
-  onUnmounted(() => gate?.cancel());
 
   watch(
     resourcesProgress,
@@ -47,7 +25,15 @@ export const usePreloader = () => {
   watch(
     progress,
     (newProgress) => {
-      const rect = document.querySelector(".preloader-rect") as HTMLElement | null;
+      const rect = document.querySelector(".preloader-rect") as HTMLElement;
+      const preloader = document.querySelector(".preloader") as HTMLElement;
+      if (newProgress === 1) {
+        gsap.delayedCall(0.2, () => {
+          document.body.classList.remove("is-loading");
+          preloader.classList.add("preloader-hidden");
+          preloaderVisible.value = false;
+        });
+      }
 
       if (rect) rect.style.transform = `scaleY(${newProgress})`;
     },
