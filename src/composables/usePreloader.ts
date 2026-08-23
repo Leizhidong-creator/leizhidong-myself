@@ -1,6 +1,7 @@
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import { resources } from "../utils/resources";
 import { createPreloaderGate } from "./preloaderGate";
+import { threeReady } from "../three";
 
 export const preloaderVisible = ref(true);
 
@@ -21,8 +22,16 @@ export const usePreloader = () => {
       resourcesProgress.value = newProgress;
     });
 
-    // Show the app shell quickly; Three.js resources continue loading in the background.
     gate = createPreloaderGate(revealApp);
+    if (threeReady.value) {
+      gate.markReady();
+    } else {
+      const stopWatchingThree = watch(threeReady, (ready) => {
+        if (!ready) return;
+        gate?.markReady();
+        stopWatchingThree();
+      });
+    }
   });
 
   onUnmounted(() => gate?.cancel());

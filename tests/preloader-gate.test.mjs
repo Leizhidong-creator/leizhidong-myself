@@ -3,15 +3,17 @@ import assert from "node:assert/strict";
 
 const { createPreloaderGate } = await import("../src/composables/preloaderGate.ts");
 
-test("preloader gate reveals the app without waiting for resource completion", async () => {
+test("preloader gate waits for the core 3D scene before revealing the app", async () => {
   let reveals = 0;
   const gate = createPreloaderGate(() => {
     reveals += 1;
-  }, 10);
+  });
 
   await new Promise((resolve) => setTimeout(resolve, 25));
 
+  assert.equal(reveals, 0);
+  gate.markReady();
   assert.equal(reveals, 1);
-  gate.revealOnce();
+  gate.markReady();
   assert.equal(reveals, 1);
 });

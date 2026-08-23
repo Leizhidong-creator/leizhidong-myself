@@ -1,17 +1,14 @@
-export function createPreloaderGate(reveal: () => void, delayMs = 350) {
+export function createPreloaderGate(reveal: () => void) {
   let revealed = false;
 
-  const revealOnce = () => {
+  const markReady = () => {
     if (revealed) return;
     revealed = true;
-    clearTimeout(timer);
     reveal();
   };
 
-  const timer = setTimeout(revealOnce, delayMs);
-
   return {
-    revealOnce,
-    cancel: () => clearTimeout(timer),
+    markReady,
+    cancel: () => undefined,
   };
 }
