@@ -7,30 +7,44 @@ import ProjectContent from "./ProjectContent.vue";
 import Footer from "../../../components/Footer.vue";
 import { locale } from "../../../i18n/store";
 import { lenis } from "../../../composables/useScroll";
+import { createProjectLoader } from "../utils/projectLoader";
 
 import type { Locale } from "../../../i18n/types";
 
-const loading = ref(true);
+const loading = ref(false);
 const content = ref(null);
 const error = ref<Error | null>(null);
+let loadVersion = 0;
 
-const fetchProject = async (project: string | undefined) => {
-  try {
-    const module = await projectModules[locale.value as Locale][project as string].default;
-    content.value = module;
-    loading.value = false;
-  } catch (err) {
-    error.value = new Error(`Failed to fetch project ${project}`);
-  } finally {
-    loading.value = false;
-  }
-};
+const projectLoader = createProjectLoader(async (project: string) => {
+  const module = projectModules[locale.value as Locale][project];
+  if (!module) throw new Error(`Unknown project ${project}`);
+  return module.default;
+});
 
 watch(
-  [recentProjectId, locale],
-  () => {
-    if (recentProjectId.value) {
-      fetchProject(recentProjectId.value);
+  [projectId, locale],
+  async ([currentProjectId]) => {
+    content.value = null;
+    error.value = null;
+
+    if (!currentProjectId) {
+      projectLoader.cancel();
+      loading.value = false;
+      return;
+    }
+
+    loading.value = true;
+    const version = ++loadVersion;
+    try {
+      const loadedContent = await projectLoader.load(currentProjectId);
+      if (loadedContent) content.value = loadedContent;
+    } catch (err) {
+      if (projectLoader.current.value === null) {
+        error.value = new Error(`Failed to fetch project ${currentProjectId}`);
+      }
+    } finally {
+      if (version === loadVersion) loading.value = false;
     }
   },
   { immediate: true },
@@ -59,6 +73,7 @@ watch(
     <div :class="['project-content-wrapper', projectVisible && `project-content-wrapper-visible`]">
       <ProjectContent
         v-if="content && recentProjectId && projectVisible"
+        :key="recentProjectId"
         :content="content"
         :projectId="recentProjectId"
       />

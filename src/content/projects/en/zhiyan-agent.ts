@@ -1,7 +1,7 @@
-import zhiyan0 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-0.png";
-import zhiyan1 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-1.png";
-import zhiyan2 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-2.png";
-import zhiyan3 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-3.png";
+import zhiyan0 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-0.webp";
+import zhiyan1 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-1.webp";
+import zhiyan2 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-2.webp";
+import zhiyan3 from "../../../assets/images/projects/zhiyan-agent/zhiyan-agent-3.webp";
 
 import type { ProjectContent } from "../../types";
 

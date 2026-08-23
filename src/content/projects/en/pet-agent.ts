@@ -1,9 +1,9 @@
-import pet0 from "../../../assets/images/projects/pet-agent/pet-agent-0.png";
-import pet1 from "../../../assets/images/projects/pet-agent/pet-agent-1.png";
-import pet2 from "../../../assets/images/projects/pet-agent/pet-agent-2.png";
-import pet3 from "../../../assets/images/projects/pet-agent/pet-agent-3.png";
-import pet4 from "../../../assets/images/projects/pet-agent/pet-agent-4.png";
-import pet5 from "../../../assets/images/projects/pet-agent/pet-agent-5.png";
+import pet0 from "../../../assets/images/projects/pet-agent/pet-agent-0.webp";
+import pet1 from "../../../assets/images/projects/pet-agent/pet-agent-1.webp";
+import pet2 from "../../../assets/images/projects/pet-agent/pet-agent-2.webp";
+import pet3 from "../../../assets/images/projects/pet-agent/pet-agent-3.webp";
+import pet4 from "../../../assets/images/projects/pet-agent/pet-agent-4.webp";
+import pet5 from "../../../assets/images/projects/pet-agent/pet-agent-5.webp";
 
 import type { ProjectContent } from "../../types";
 

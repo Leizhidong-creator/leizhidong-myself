@@ -1,8 +1,8 @@
-import garden0 from "../../../assets/images/projects/garden-dream/garden-dream-0.jpg";
-import garden1 from "../../../assets/images/projects/garden-dream/garden-dream-1.jpg";
-import garden2 from "../../../assets/images/projects/garden-dream/garden-dream-2.jpg";
-import garden3 from "../../../assets/images/projects/garden-dream/garden-dream-3.jpg";
-import garden4 from "../../../assets/images/projects/garden-dream/garden-dream-4.jpg";
+import garden0 from "../../../assets/images/projects/garden-dream/garden-dream-0.webp";
+import garden1 from "../../../assets/images/projects/garden-dream/garden-dream-1.webp";
+import garden2 from "../../../assets/images/projects/garden-dream/garden-dream-2.webp";
+import garden3 from "../../../assets/images/projects/garden-dream/garden-dream-3.webp";
+import garden4 from "../../../assets/images/projects/garden-dream/garden-dream-4.webp";
 
 import type { ProjectContent } from "../../types";
 
