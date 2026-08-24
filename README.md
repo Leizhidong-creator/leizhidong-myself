@@ -15,12 +15,12 @@
 </div>
 
 <p align="center">
-  <a href="docs/readme/portfolio-demo.mp4">
-    <img src="docs/readme/portfolio-demo-cover.webp" alt="雷智栋 3D 个人作品集展示视频封面" width="100%" />
+  <a href="https://leizhidong.cn">
+    <img src="docs/readme/portfolio-demo.gif" alt="雷智栋 3D 个人作品集首页动态展示" width="100%" />
   </a>
 </p>
 
-<p align="center"><sub>GitHub README 不稳定支持内嵌 MP4 播放器，点击封面即可观看 10 秒展示视频。</sub></p>
+<p align="center"><sub>首页交互录屏已压缩为自动循环 GIF，点击动图进入线上作品集。</sub></p>
 
 ## 🎬 这是什么
 
@@ -41,19 +41,16 @@
 | 内容加载 | 关键资源预载、非首屏资源延迟加载 | 先进入作品集，再按需加载更重的项目媒体 |
 | 项目叙事 | 数据驱动内容、深路由 | 每个作品拥有独立页面、图文结构和下一项目导航 |
 
-## 📚 精选作品
+## 💡 网站创新点
 
-<p align="center">
-  <a href="https://leizhidong.cn/#projects">
-    <img src="docs/readme/portfolio-projects.png" alt="作品集网站中的精选项目列表" width="100%" />
-  </a>
-</p>
+把“看起来很酷”拆成可解释的工程架构：
 
-| 项目 | 简介 | 我的工作与成果 |
+| 创新点 | 解决的需求 | 使用的技术栈 | 最终效果 |
 | --- | --- | --- |
-| [《游园惊梦》](https://leizhidong.cn/#projects) | 用 AI 建模、Three.js 与 WebGL 重构苏州园林的沉浸式数字体验 | 队长与技术核心开发者；负责 3D/DOM 混合渲染、互动沙盘和页面动效；抖音 AI 创变者黑客松山西赛区一等奖 |
-| [智演 Agent](https://leizhidong.cn/#projects) | 面向高密度人群风险治理的 AI 数字孪生推演工作区 | 项目负责人；负责前端交互、Canvas 2.5D 沙盘与 Agent 推演系统；中国机器人及人工智能大赛国奖 |
-| [Pet Agent](https://leizhidong.cn/#projects) | 覆盖诊疗、宠粮识别、出行和训练的智能宠物管家 | AI Web 应用前端与核心开发者；整合 Qwen、RAG、图像识别和地图能力；中国高校智能机器人创意大赛国奖 |
+| **3D 数字工作室与角色场景** | 个人介绍需要有记忆点，而不是一张静态简历 | Three.js、GLB、GLSL、实时材质与光影 | 把个人网站变成可探索的数字工作室，角色、房间和物件共同承担叙事 |
+| **滚动驱动的镜头叙事** | 页面滚动、镜头和文字容易各自运行 | GSAP Timeline、Lenis、Waypoints、MatchMedia | 滚动统一编排镜头、DOM 和场景转场，形成连续的空间叙事 |
+| **Vue DOM 与 Three.js 混合渲染** | 纯 3D 信息难读，纯 DOM 又缺少空间感 | Vue 3、TypeScript、Three.js、WebGL、ProjectedElement | 3D 负责氛围和纵深，DOM 负责标题、导航与可访问内容 |
+| **分级资源调度与数据驱动内容** | 模型、音频和项目媒体容易拖慢首屏，内容也难维护 | 关键资源清单、加权进度、失败重试、动态导入、`import.meta.glob`、History API、i18n | 先完成可交互启动，再按需加载内容；项目页由配置生成并支持扩展 |
 
 ## ⚙️ 技术栈
 
@@ -127,7 +124,7 @@ src/
 
 tests/                  # 关键资源、预加载和 GitHub Pages 测试
 public/                 # 字体、Meta 图片与静态页面
-docs/readme/            # README 展示视频与截图
+docs/readme/            # README 展示视频与动图
 ```
 
 ## 🌐 构建与部署
