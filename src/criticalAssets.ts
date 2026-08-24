@@ -17,14 +17,14 @@ const numbersBitmap = new URL("./assets/textures/numbers-bitmap.webp", import.me
 const roomTexture = new URL("./assets/textures/room.webp", import.meta.url).href;
 const roomShadowTexture = new URL("./assets/textures/room-shadow.webp", import.meta.url).href;
 const hologramPlaneTexture = new URL("./assets/textures/hologram-plane.webp", import.meta.url).href;
-const soundClick = new URL("./assets/sounds/click.mp3", import.meta.url).href;
+const soundClick = new URL("./assets/sounds/click.ogg", import.meta.url).href;
 const contactSprite = new URL("./assets/sounds/sprites/contact.ogg", import.meta.url).href;
-const roomSprite = new URL("./assets/sounds/sprites/room.mp3", import.meta.url).href;
+const roomSprite = new URL("./assets/sounds/sprites/room.ogg", import.meta.url).href;
 const trackLuci = new URL("./assets/music/luci.ogg", import.meta.url).href;
 const trackAbout = new URL("./assets/music/ambient-pads.ogg", import.meta.url).href;
-const thumbnailGardenDream = new URL("./assets/thumbnails/garden-dream.jpg", import.meta.url).href;
-const thumbnailZhiyanAgent = new URL("./assets/thumbnails/zhiyan-agent.jpg", import.meta.url).href;
-const thumbnailPetAgent = new URL("./assets/thumbnails/pet-agent.jpg", import.meta.url).href;
+const thumbnailGardenDream = new URL("./assets/thumbnails/garden-dream.webp", import.meta.url).href;
+const thumbnailZhiyanAgent = new URL("./assets/thumbnails/zhiyan-agent.webp", import.meta.url).href;
+const thumbnailPetAgent = new URL("./assets/thumbnails/pet-agent.webp", import.meta.url).href;
 
 type BaseAsset = {
   name: string;
@@ -52,10 +52,10 @@ export const coverAssetUrls = {
 } as const;
 
 export const criticalAssets = [
-  { name: "avatar-model", type: "gltfModel", path: avatarModel, weight: 616_536 },
-  { name: "lab-model", type: "gltfModel", path: labModel, weight: 11_384 },
-  { name: "room-model", type: "gltfModel", path: roomModel, weight: 289_976 },
-  { name: "contact-model", type: "gltfModel", path: contactModel, weight: 10_580 },
+  { name: "avatar-model", type: "gltfModel", path: avatarModel, weight: 296_976 },
+  { name: "lab-model", type: "gltfModel", path: labModel, weight: 9_276 },
+  { name: "room-model", type: "gltfModel", path: roomModel, weight: 146_484 },
+  { name: "contact-model", type: "gltfModel", path: contactModel, weight: 8_996 },
   { name: "contact-texture", type: "texture", path: contactTexture, weight: 111_790 },
   { name: "contact-shadow-texture", type: "texture", path: contactShadowTexture, weight: 2_910 },
   { name: "desktops-texture", type: "texture", path: desktopsTexture, weight: 5_320 },
@@ -71,14 +71,14 @@ export const criticalAssets = [
   { name: "numbers-bitmap", type: "texture", path: numbersBitmap, weight: 6_564 },
   { name: "room-texture", type: "texture", path: roomTexture, weight: 117_996 },
   { name: "room-shadow-texture", type: "texture", path: roomShadowTexture, weight: 3_050 },
-  { name: "sound-click", type: "sound", path: soundClick, weight: 1_419 },
+  { name: "sound-click", type: "sound", path: soundClick, weight: 5_098 },
   { name: "sound-contact", type: "sound", path: contactSprite, weight: 24_587 },
-  { name: "sound-room", type: "sound", path: roomSprite, weight: 148_418 },
+  { name: "sound-room", type: "sound", path: roomSprite, weight: 42_851 },
   { name: "music-luci", type: "sound", path: trackLuci, weight: 176_293 },
   { name: "music-about", type: "sound", path: trackAbout, weight: 199_850 },
-  { name: "cover-garden-dream", type: "cover", path: thumbnailGardenDream, weight: 179_745 },
-  { name: "cover-zhiyan-agent", type: "cover", path: thumbnailZhiyanAgent, weight: 151_303 },
-  { name: "cover-pet-agent", type: "cover", path: thumbnailPetAgent, weight: 153_578 },
+  { name: "cover-garden-dream", type: "cover", path: thumbnailGardenDream, weight: 140_372 },
+  { name: "cover-zhiyan-agent", type: "cover", path: thumbnailZhiyanAgent, weight: 116_260 },
+  { name: "cover-pet-agent", type: "cover", path: thumbnailPetAgent, weight: 109_036 },
 ] as const satisfies readonly CriticalAsset[];
 
 export const threeSources = criticalAssets.filter(
