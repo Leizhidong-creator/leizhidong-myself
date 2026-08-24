@@ -41,3 +41,20 @@ test("a stale failed load does not reject the active project", async () => {
   resolvers.get("pet-agent")({ title: "Pet" });
   assert.deepEqual(await second, { title: "Pet" });
 });
+
+test("latest project load wins when project modules are asynchronous", async () => {
+  const resolvers = new Map();
+  const loadModule = (id) =>
+    new Promise((resolve) => {
+      resolvers.set(id, resolve);
+    });
+  const loader = createProjectLoader(async (id) => (await loadModule(id)).default);
+
+  const first = loader.load("garden-dream");
+  const second = loader.load("zhiyan-agent");
+  resolvers.get("garden-dream")({ default: { title: "Garden" } });
+  resolvers.get("zhiyan-agent")({ default: { title: "Zhiyan" } });
+
+  assert.equal(await first, null);
+  assert.deepEqual(await second, { title: "Zhiyan" });
+});
