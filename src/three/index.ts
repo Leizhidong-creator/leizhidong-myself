@@ -4,7 +4,6 @@ import { objects } from "./objects";
 import { renderTarget } from "./core/renderTarget";
 import { threeSizes } from "./utils/sizes";
 import { raycast } from "./utils/raycast";
-import { resources } from "../utils/resources";
 
 let canvas: HTMLCanvasElement | null = null;
 let preparation: Promise<void> | null = null;
@@ -43,10 +42,6 @@ const prepare = (_canvas: HTMLCanvasElement, onProgress: (value: number) => void
   return preparation;
 };
 
-const init = (_canvas: HTMLCanvasElement) => {
-  void resources.startLoading().then(() => prepare(_canvas));
-};
-
 const destroy = () => {
   if (raycastInitialized) raycast.destroy();
   threeSizes.destroy();
@@ -60,4 +55,4 @@ const destroy = () => {
   raycastInitialized = false;
 };
 
-export const three = { init, prepare, destroy };
+export const three = { prepare, destroy };

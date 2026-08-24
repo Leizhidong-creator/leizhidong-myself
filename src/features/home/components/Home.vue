@@ -18,6 +18,7 @@ import { useAgent } from "../../../composables/useAgent";
 import { projectId, projectVisible } from "../../../composables/useRouteObserver";
 import { isTransitioning } from "../../../composables/useProjectTransition";
 import { renderer } from "../../../three/core/renderer";
+import { criticalBoot } from "../../../utils/criticalBoot";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyObserver = ref<IntersectionObserver | null>(null);
@@ -85,7 +86,7 @@ onMounted(() => {
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
   if (threeCanvasRef.value && !threeInitialized.value) {
-    three.init(threeCanvasRef.value);
+    void criticalBoot.start(threeCanvasRef.value);
     threeInitialized.value = true;
   }
 
