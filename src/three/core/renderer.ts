@@ -41,7 +41,7 @@ const resize = () => {
   instance.setPixelRatio(threeSizes.pixelRatio);
 };
 
-const tick = () => {
+const renderFrame = (force = false) => {
   const shouldBeVisible = !camera.instance.position.equals(emptyVector) && isActive;
 
   if (canvas && shouldBeVisible !== visible) {
@@ -49,7 +49,7 @@ const tick = () => {
     visible = shouldBeVisible;
   }
 
-  if (!instance || !shouldBeVisible) return;
+  if (!instance || (!force && !shouldBeVisible)) return;
 
   if (sceneWeights.about > 0.001) {
     renderTarget.render();
@@ -58,6 +58,29 @@ const tick = () => {
   const color = sceneWeights.contact > 0.001 ? colors.beigeDark : colors.beigeLight;
   instance.setClearColor(color);
   instance.render(scene.instance, camera.instance);
+};
+
+const tick = () => renderFrame();
+
+const renderOnce = () => {
+  if (!instance) throw new Error("Renderer not initialized");
+  renderFrame(true);
+};
+
+const hasNonBlankFrame = () => {
+  if (!instance) return false;
+  const gl = instance.getContext();
+  const pixel = new Uint8Array(4);
+  gl.readPixels(
+    Math.floor(instance.domElement.width / 2),
+    Math.floor(instance.domElement.height / 2),
+    1,
+    1,
+    gl.RGBA,
+    gl.UNSIGNED_BYTE,
+    pixel,
+  );
+  return (pixel[3] ?? 0) > 0 && ((pixel[0] ?? 0) > 0 || (pixel[1] ?? 0) > 0 || (pixel[2] ?? 0) > 0);
 };
 
 const compile = async () => {
@@ -115,4 +138,4 @@ const destroy = () => {
   visible = true;
 };
 
-export const renderer = { init, destroy, getInstance, compile, setIsActive };
+export const renderer = { init, destroy, getInstance, compile, renderOnce, hasNonBlankFrame, setIsActive };

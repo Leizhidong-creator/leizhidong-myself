@@ -8,10 +8,11 @@ export type RetryEnvironment = {
 };
 
 const browserEnvironment: RetryEnvironment = {
-  isOnline: () => navigator.onLine,
-  schedule: (callback, delayMs) => window.setTimeout(callback, delayMs),
-  cancel: (handle) => window.clearTimeout(handle as number),
+  isOnline: () => typeof navigator === "undefined" || navigator.onLine !== false,
+  schedule: (callback, delayMs) => globalThis.setTimeout(callback, delayMs),
+  cancel: (handle) => globalThis.clearTimeout(handle as number),
   onOnline: (callback) => {
+    if (typeof window === "undefined") return () => undefined;
     window.addEventListener("online", callback);
     return () => window.removeEventListener("online", callback);
   },

@@ -68,4 +68,4 @@ const destroy = () => {
   gsap.ticker.remove(tick);
 };
 
-export const waypoints = { init, points, updateReferences, position, focus, destroy };
+export const waypoints = { init, points, updateReferences, update: tick, position, focus, destroy };
