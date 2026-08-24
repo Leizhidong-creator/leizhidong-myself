@@ -1,74 +1,76 @@
-# Classical Gardens of Suzhou README 设计说明
+# Classical Gardens of Suzhou README Design
 
-## 目标
+## Purpose
 
-将仓库 README 改写为一篇中文主导、具有视觉叙事感的项目说明，服务于 **Classical Gardens of Suzhou / 游园惊梦**。读者先理解作品的气质和体验，再进入技术实现与性能优化，同时能够快速确认项目的竞赛成绩、个人职责、运行方式和开源模型来源。
+Rewrite the repository README as a Chinese-first, visually directed case study for **Classical Gardens of Suzhou / 游园惊梦**. The README should make the experience understandable before asking readers to parse implementation details, while still documenting the optimization decisions that make the project technically credible.
 
-## 读者
+## Audience
 
-- 在 GitHub 上浏览前端视觉作品的访客。
-- 需要快速了解项目创意、个人贡献和竞赛成果的评审或合作伙伴。
-- 希望运行项目并参考 3D 资产处理方式的开发者。
+- Visitors evaluating a front-end visual experience on GitHub.
+- Competition reviewers and collaborators who need a concise account of the product idea, role, result, and technical contribution.
+- Developers who want to run the current repository and follow the open-source model reference.
 
-## 内容约定
+## Content Contract
 
-### 开场区域
+### Opening
 
-- 中文标题：`游园惊梦｜Classical Gardens of Suzhou`。
-- 一句话定位：把苏州园林文化转化为可探索、可互动、可参与创作的沉浸式数字园林体验。
-- 中文简介之后放一小段英文摘要，便于海外技术读者快速理解。
-- 在首屏附近提供在线体验、代码仓库和 Meta Research 官方 `facebookresearch/sam-3d-objects` 仓库链接。
-- 荣誉明确写为：`抖音 AI 创变者黑客松山西赛区一等奖 · 游园会之星`。
+- Chinese title: `游园惊梦｜Classical Gardens of Suzhou`.
+- One-line positioning: an immersive digital garden experience that turns classical Suzhou garden culture into an explorable, interactive miniature world.
+- A short English abstract directly below the Chinese introduction.
+- High-signal links for live demo, repository, and Meta Research's official `facebookresearch/sam-3d-objects` repository.
+- Award line: `抖音 AI 创变者黑客松山西赛区一等奖 · 游园会之星`.
 
-### 体验叙事
+### Experience narrative
 
-用易懂的中文说明三个核心体验：
+Explain three product ideas in plain language:
 
-1. 以江南花窗作为递进式叙事入口，而不是一次性展示全部场景。
-2. 通过微缩 3D 园林、柔和水乡光影和可把玩的尺度，让用户进入“掌中园林”。
-3. 通过“一窗一景”自由沙盘，让用户拖拽亭台、假山等元素，成为自己窗景的造园者。
+1. Flower-window-led progressive storytelling rather than a conventional all-at-once virtual tour.
+2. A miniature 3D garden with soft-water-town light, reflective surfaces, and a hand-held scale.
+3. The `一窗一景` sandbox, where visitors move garden elements and become co-creators of a personal window scene.
 
-### 技术说明
+### Technical case study
 
-使用一条简洁链路表达项目方法：
+Document the pipeline as a compact flow:
 
-`2D 参考素材 → Meta SAM 3D 资产生成 → 材质 / 比例 / 坐标适配 → Three.js + WebGL 场景 → DOM 与 3D 混合交互`。
+`2D reference → Meta SAM 3D asset generation → material / scale / coordinate adaptation → Three.js + WebGL scene → DOM and 3D interaction layer`.
 
-当前仓库的技术栈按事实写为 `Vue 3`、`TypeScript`、`Vite`、`Three.js`、`GSAP`、`Lenis`、`Howler` 和 GLSL 工具链。竞赛原型中使用过的 React `lazy` / `Suspense`、`useGLTF.preload` 等方案要标注为“竞赛版本的实现思路”，不能让读者误以为当前仓库仍然是 React 项目。
+Describe the current repository stack truthfully as `Vue 3`, `TypeScript`, `Vite`, `Three.js`, `GSAP`, `Lenis`, `Howler`, and GLSL tooling. Framework-specific optimizations from the competition prototype (React `lazy` / `Suspense`, `useGLTF.preload`) must be labeled as prototype-era implementation decisions, not claimed as the current Vue implementation.
 
-### 优化链路
+### Optimization section
 
-用“问题—决策—结果”表格呈现：
+Use a table with problem, decision, and effect:
 
-- 首屏空白：按幕拆分体验，先渲染轻量的第一幕，再加载较重的 3D 资源。
-- 模型请求互相竞争：竞赛版本采用 GLB `prefetch` 与 `useGLTF.preload`；当前项目将非首屏详情媒体移出关键加载路径。
-- 模型只能展示、不能解释：通过 `tags.json` 把园林构件标签绑定到模型局部坐标，再结合相机控制和 DOM 标签实现点读。
-- 高模、转场和音频同时运行造成压力：协同 Three.js / React Three Fiber、GSAP 和音频链路，优先保证中端设备上的连续交互体验。
+- Initial blank screen: split the experience into scenes and load the light first scene before heavier 3D resources.
+- Model request contention: use GLB prefetch and `useGLTF.preload` in the competition prototype; keep non-critical detail media out of the critical path.
+- Models that only display: bind component tags to local model coordinates through `tags.json`, then combine camera controls with DOM labels.
+- Rendering pressure: coordinate Three.js / React Three Fiber, GSAP transitions, and audio playback; target a smooth mid-range-device interaction rather than maximum polygon density.
 
-作品集文档中的性能数字如果标注为“包装估算”，README 不将其写成已完成的基准测试；“48 小时完成”和竞赛获奖属于项目事实，可以明确呈现。
+Avoid presenting estimated performance figures as benchmark results unless the source document explicitly identifies them as estimates. The 48-hour delivery and award are factual project outcomes.
 
-### 模型来源与致谢
+### Model source and attribution
 
-链接到 Meta Research 官方仓库，并说明 Meta 模型是上游开源研究资产。本项目的贡献包括资产筛选、模型清理与适配、场景构图、空间坐标映射、加载策略和交互设计；不将模型权重或其许可证表述为本项目所有。
+Link to the official Meta Research repository and state that the project uses the model as an upstream research/open-source asset. Clarify that the project contribution is asset selection, model cleanup and adaptation, scene composition, coordinate mapping, loading strategy, and interaction design. Do not imply that the repository's model weights or license are owned by this project.
 
-### 运行与目录
+### Practical usage
 
-- 提供 `npm install`、`npm run dev`、`npm run build`、`npm run preview`。
-- 开发端口只有在与当前 Vite 配置一致时才写入。
-- 用简短目录树指向 `src/content/projects`、`src/assets/images/projects`、`src/assets/models` 和 `src/three` 等关键位置。
+- Include `npm install`, `npm run dev`, `npm run build`, and `npm run preview`.
+- Mention the development port only if it matches the current Vite configuration.
+- Add a compact current-repository tree, focused on `src/content/projects`, `src/assets/images/projects`, `src/assets/models`, and `src/three`.
 
-### 视觉语言
+### Visual language
 
-- 使用少量、克制的 Markdown badges，不堆叠徽章。
-- 在顶部附近使用仓库已有的园林预览图，组成双图或三图画廊。
-- 正文以中文为主，英文只用于摘要、模型名、技术栈和必要的专业术语。
-- 不添加仓库和作品集文档无法证明的指标、评价或外部背书。
+- Use restrained Markdown badges, not a dense badge wall.
+- Use existing garden preview assets in a two- or three-image gallery near the top.
+- Keep headings short, use Chinese body copy, and reserve English for the abstract and selected technical labels.
+- Use no invented metrics, external testimonials, or claims not supported by the repository or the portfolio document.
 
-## 完成前检查
+## Verification
 
-- GitHub README 语境下的本地图片链接全部可解析。
-- 在线体验地址和 Meta SAM 3D 地址都可点击。
-- 命令与 `package.json` 一致。
-- 奖项名称、个人身份与 `作品集文档.md` 一致。
-- README 不介绍其他两个作品。
-- Markdown 表格、链接和 HTML 标签没有语法错误。
+Before completion, verify:
+
+- All local image links resolve from GitHub's README context.
+- The live demo URL and Meta SAM 3D URL are clickable.
+- Commands match `package.json`.
+- Award wording and role match `作品集文档.md`.
+- The README does not describe the other portfolio projects.
+- Markdown renders without malformed tables, broken HTML, or unclosed links.
