@@ -7,10 +7,6 @@ import { tick as contactTick } from "../core/contact";
 import { useAgent } from "../../../composables/useAgent";
 import { stopSnoreRepetition } from "../core/contact";
 import { tick as roomTick } from "../core/room";
-import { sounds } from "../definitions/sounds";
-import { getSoundsHowl } from "../utils/sounds";
-
-import type { SoundKey } from "../types";
 
 export const howlerUnlocked = ref(false);
 export const soundsEnabled = ref(false);
@@ -73,15 +69,6 @@ export const useHowler = () => {
     localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
   });
 
-  const loadAllSounds = () => {
-    for (const sound of Object.keys(sounds) as SoundKey[]) {
-      const howl = getSoundsHowl(sound);
-      if (howl) {
-        howl.load();
-      }
-    }
-  };
-
   onMounted(() => {
     if (!isFeatureEnabled("sounds")) return;
     Howler.volume(0);
@@ -94,9 +81,6 @@ export const useHowler = () => {
     window.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("keydown", handleKeyPress);
 
-    if (!isTouch.value) {
-      loadAllSounds();
-    }
   });
 
   onUnmounted(() => {

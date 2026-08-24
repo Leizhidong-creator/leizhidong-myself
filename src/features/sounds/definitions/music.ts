@@ -1,13 +1,11 @@
 import { Howl } from "howler";
-
-import trackLuci from "../../../assets/music/luci.ogg";
-import trackAbout from "../../../assets/music/ambient-pads.ogg";
+import { soundAssetUrls } from "../../../criticalAssets";
 
 import type { MusicTrack } from "../types";
 
 export const musicTracks = {
-  luci: new Howl({ src: [trackLuci], loop: true, volume: 0, preload: false }),
-  about: new Howl({ src: [trackAbout], loop: true, volume: 0, preload: false }),
+  luci: new Howl({ src: [soundAssetUrls.luci], loop: true, volume: 0, preload: false }),
+  about: new Howl({ src: [soundAssetUrls.about], loop: true, volume: 0, preload: false }),
 } as const;
 
 export const BASE_VOLUMES = {
