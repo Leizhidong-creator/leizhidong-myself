@@ -11,6 +11,9 @@ export type HowlAdapter = {
 
 export type ImageAdapter = {
   src: string;
+  currentSrc?: string;
+  complete?: boolean;
+  naturalWidth?: number;
   onload: null | ((...args: any[]) => void);
   onerror: null | ((...args: any[]) => void);
   decode(): Promise<void>;
@@ -41,9 +44,13 @@ function loadHowl(howl: HowlAdapter): Promise<void> {
   });
 }
 
-function loadImage(path: string, createImage: () => ImageAdapter): Promise<void> {
+function loadImage(path: string, createImage: (path: string) => ImageAdapter): Promise<void> {
   return new Promise((resolve, reject) => {
-    const image = createImage();
+    const image = createImage(path);
+    if (image.complete && (image.naturalWidth ?? 0) > 0) {
+      image.decode().then(resolve, reject);
+      return;
+    }
     image.onload = () => {
       image.onload = null;
       image.onerror = null;
@@ -56,6 +63,14 @@ function loadImage(path: string, createImage: () => ImageAdapter): Promise<void>
     };
     image.src = path;
   });
+}
+
+function findMountedCover(path: string): ImageAdapter {
+  const image = Array.from(document.querySelectorAll<HTMLImageElement>(".preview-card-image")).find(
+    (candidate) => candidate.currentSrc === path || candidate.src === path,
+  );
+  if (!image) throw new Error(`Mounted cover is not ready: ${path}`);
+  return image;
 }
 
 export async function loadCriticalSounds(
@@ -80,7 +95,7 @@ export async function loadCriticalSounds(
 
 export async function loadCriticalCovers(
   onProgress: (value: number) => void,
-  createImage: () => ImageAdapter = () => new Image(),
+  createImage: (path: string) => ImageAdapter = findMountedCover,
   retry: Retry = runWithRetry,
 ): Promise<void> {
   const entries = coverSources.map((source) => ({ id: source.name, weight: source.weight }));
