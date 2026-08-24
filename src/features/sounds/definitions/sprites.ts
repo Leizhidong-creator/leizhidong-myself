@@ -1,13 +1,12 @@
 import { Howl } from "howler";
-import contactSprite from "../../../assets/sounds/sprites/contact.ogg";
-import roomSprite from "../../../assets/sounds/sprites/room.mp3";
+import { soundAssetUrls } from "../../../criticalAssets";
 
 import type { SpritesData } from "../types";
 
 export const sprites = {
   contact: {
     howl: new Howl({
-      src: [contactSprite],
+      src: [soundAssetUrls.contact],
       sprite: {
         gasp: [0, 485.32879818594105, false],
         snore: [1200, 2761.972789115646, false],
@@ -17,7 +16,7 @@ export const sprites = {
   },
   room: {
     howl: new Howl({
-      src: [roomSprite],
+      src: [soundAssetUrls.room],
       sprite: {
         bird: [0, 136.89342403628119, false],
         keyboard: [1200, 2856.666666666667, false],

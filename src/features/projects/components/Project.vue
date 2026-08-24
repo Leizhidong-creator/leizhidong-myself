@@ -10,15 +10,17 @@ import { lenis } from "../../../composables/useScroll";
 import { createProjectLoader } from "../utils/projectLoader";
 
 import type { Locale } from "../../../i18n/types";
+import type { ProjectContent as ProjectContentData } from "../../../content/types";
 
 const loading = ref(false);
-const content = ref(null);
+const content = ref<ProjectContentData | null>(null);
 const error = ref<Error | null>(null);
 let loadVersion = 0;
 
 const projectLoader = createProjectLoader(async (project: string) => {
-  const module = projectModules[locale.value as Locale][project];
-  if (!module) throw new Error(`Unknown project ${project}`);
+  const loadModule = projectModules[locale.value as Locale][project];
+  if (!loadModule) throw new Error(`Unknown project ${project}`);
+  const module = await loadModule();
   return module.default;
 });
 

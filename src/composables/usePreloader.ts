@@ -1,42 +1,35 @@
-import { ref, watch, onMounted } from "vue";
-import { resources } from "../utils/resources";
+import { onUnmounted, ref, watch } from "vue";
 import gsap from "gsap";
+import { criticalBoot } from "../utils/criticalBoot";
 
 export const preloaderVisible = ref(true);
 
 export const usePreloader = () => {
-  const progress = ref(0);
-  const resourcesProgress = ref(0);
+  const progress = ref(criticalBoot.progress);
 
-  onMounted(() => {
-    resources.on("progress", (newProgress) => {
-      resourcesProgress.value = newProgress;
+  const stopProgress = criticalBoot.onProgress((newProgress) => {
+    progress.value = newProgress;
+  });
+  const stopReady = criticalBoot.onReady(() => {
+    gsap.delayedCall(0.2, () => {
+      const preloader = document.querySelector(".preloader") as HTMLElement | null;
+      document.body.classList.remove("is-loading");
+      preloader?.classList.add("preloader-hidden");
+      preloaderVisible.value = false;
     });
   });
 
   watch(
-    resourcesProgress,
-    (newProgress) => {
-      progress.value = 0.25 + newProgress * 0.75;
-    },
-    { immediate: true },
-  );
-
-  watch(
     progress,
     (newProgress) => {
-      const rect = document.querySelector(".preloader-rect") as HTMLElement;
-      const preloader = document.querySelector(".preloader") as HTMLElement;
-      if (newProgress === 1) {
-        gsap.delayedCall(0.2, () => {
-          document.body.classList.remove("is-loading");
-          preloader.classList.add("preloader-hidden");
-          preloaderVisible.value = false;
-        });
-      }
-
+      const rect = document.querySelector(".preloader-rect") as HTMLElement | null;
       if (rect) rect.style.transform = `scaleY(${newProgress})`;
     },
     { immediate: true },
   );
+
+  onUnmounted(() => {
+    stopProgress();
+    stopReady();
+  });
 };

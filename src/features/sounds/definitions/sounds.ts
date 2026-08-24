@@ -1,8 +1,7 @@
 import { Howl } from "howler";
+import { soundAssetUrls } from "../../../criticalAssets";
 
 import type { SoundsData, SoundKey } from "../types";
-
-import soundClick from "../../../assets/sounds/click.mp3";
 //import soundHover0 from "../../../assets/sounds/hover-0.mp3";
 //import soundHover1 from "../../../assets/sounds/hover-1.mp3";
 //import soundHover2 from "../../../assets/sounds/hover-2.mp3";
@@ -10,7 +9,7 @@ import soundClick from "../../../assets/sounds/click.mp3";
 
 export const sounds = {
   bird: { spriteKey: "room", name: "bird" },
-  click: { howl: new Howl({ src: [soundClick], loop: false, volume: 1, preload: false }) },
+  click: { howl: new Howl({ src: [soundAssetUrls.click], loop: false, volume: 1, preload: false }) },
   gasp: { spriteKey: "contact", name: "gasp" },
   //hover0: { howl: new Howl({ src: [soundHover0], loop: false, volume: 0.05, preload: false }) },
   //hover1: { howl: new Howl({ src: [soundHover1], loop: false, volume: 0.05, preload: false }) },

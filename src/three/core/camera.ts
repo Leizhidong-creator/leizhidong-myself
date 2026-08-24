@@ -30,6 +30,9 @@ const init = () => {
   threeSizes.on("resize", resize);
   resize();
 
+  waypoints.updateReferences();
+  waypoints.update();
+
   if (!isTouch()) {
     window.addEventListener("mousemove", handleMouseMove);
   }
