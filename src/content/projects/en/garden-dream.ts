@@ -10,7 +10,7 @@ export default {
   title: "《游园惊梦》",
   theme: "dark",
   tags: ["vue", "three", "javascript", "gsap", "tailwind"],
-  live: "https://hanko-n123-d4gdtdwz71e80944b-1436264436.tcloudbaseapp.com",
+  live: "https://leizhidong-creator.github.io/Classical-Gardens-of-Suzhou/",
   description:
     "一站式沉浸数字园林体验，在 48 小时黑客松中用 AI 建模、Three.js 与 WebGL 重构苏州园林的微缩景观。<br/><br/>我担任队长与技术核心开发者，负责 3D 空间和 2D DOM 的混合渲染、互动沙盘、光影表现和页面动效。<br/><br/>成果：抖音 AI 创变者黑客松联赛山西赛区一等奖。",
   components: [

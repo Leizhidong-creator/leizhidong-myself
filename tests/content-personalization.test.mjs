@@ -44,7 +44,8 @@ test("portfolio content is personalized for Lei Zhidong", () => {
   assert.match(combined, /Canvas 2\.5D 实时沙盘/);
   assert.match(combined, /AIGC 多场景 Web 工作台/);
   assert.match(combined, /联系我/);
-  assert.match(combined, /hanko-n123-d4gdtdwz71e80944b-1436264436\.tcloudbaseapp\.com/);
+  assert.match(combined, /leizhidong-creator\.github\.io\/Classical-Gardens-of-Suzhou\//);
+  assert.doesNotMatch(combined, /hanko-n123-d4gdtdwz71e80944b-1436264436\.tcloudbaseapp\.com/);
   assert.match(combined, /访问项目/);
   assert.match(combined, /"source": "\/\(.\*\)"/);
   assert.match(combined, /"destination": "\/index\.html"/);
